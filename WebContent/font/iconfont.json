@@ -1,0 +1,86 @@
+{
+  "id": "2193827",
+  "name": "三叶草",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1688480",
+      "name": "提示",
+      "font_class": "tishi",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "1356142",
+      "name": "勾",
+      "font_class": "gou",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "15151574",
+      "name": "_点箭头",
+      "font_class": "lunkuohua22_lianjiefuben",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "2488143",
+      "name": "叉",
+      "font_class": "cha",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "12163503",
+      "name": "验证码",
+      "font_class": "yanzhengma",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "2161",
+      "name": "收藏夹",
+      "font_class": "shoucangjia",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1788970",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "2559431",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "11372676",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e8b2",
+      "unicode_decimal": 59570
+    },
+    {
+      "icon_id": "12687176",
+      "name": "购物车",
+      "font_class": "icon-",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "13543858",
+      "name": "联系卖家",
+      "font_class": "lianximaijia",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    }
+  ]
+}

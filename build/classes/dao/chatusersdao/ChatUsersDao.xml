@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.chatusersdao.ChatUsersDao">
+ 	<select id="getListChatUsers" parameterType="Integer" resultMap="cu">
+		select E.unread,E.message,E.time,F.* from 
+		(select c.id,c.unread,c.jiShiId,D.message,D.time from 
+		(select A.id,max(B.id) jiShiId,sum(case when B.receiveId=#{id} and see=0 then 1 else 0 end) unread from
+		(select receiveId id from chatmessage where sendOutId = #{id}
+		union
+		select sendOutId from chatmessage where receiveId = #{id} ) A inner join chatmessage B
+		on A.id = B.sendOutId or A.id = B.receiveId
+		group by A.id) C inner join chatmessage D
+		on C.jiShiId = D.id)E inner join user F
+		on E.id = F.id
+		order by unix_timestamp(time) desc
+	</select>
+	
+	<insert id=""></insert>
+	
+ 	<resultMap type="po.ChatUsers" id="cu">
+ 		<id property="userId" column="id"/>
+ 		<result property="unread" column="unread"/>
+ 		<result property="message" column="message"/>
+ 		<result property="time" column="time"/>
+ 		<association property="user" javaType="po.User">
+ 			<id property="id" column="id"/>
+ 			<result property="phoneNumber" column="phoneNumber" />
+ 			<result property="passWord" column="passWord"/>
+ 			<result property="userName" column="userName"/>
+ 			<result property="sex" column="sex"/>
+ 			<result property="idCard" column="idCard"/>
+ 			<result property="customerType" column="customerType"/>
+ 			<result property="storeName" column="storeName"/>
+ 			<result property="state" column="state"/>
+ 			<result property="createTime" column="createTime"/>
+ 			<result property="recentlyLogin" column="recentlyLogin"/>
+ 		</association>
+ 	</resultMap>
+ </mapper>

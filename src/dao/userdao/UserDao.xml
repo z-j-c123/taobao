@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.userdao.UserDao">
+ 	<select id="findUser" parameterType="po.User" resultType="po.User">
+ 		select * from user
+ 		<where>
+ 			<if test="id!=null and id!=''">
+ 				and id = #{id}
+ 			</if>
+ 			<if test="phoneNumber!=null and phoneNumber!=''">
+ 				and phoneNumber = #{phoneNumber}
+ 			</if>
+ 			<if test="passWord!=null and passWord!=''">
+ 				and passWord = #{passWord}
+ 			</if>
+ 			<if test="userName!=null and userName!=''">
+ 				and userName = #{userName}
+ 			</if>
+ 			<if test="sex!=null and sex!=''">
+ 				and sex = #{sex}
+ 			</if>
+ 			<if test="idCard!=null and idCard!=''">
+ 				and idCard = #{idCard}
+ 			</if>
+ 			<if test="customerType!=null and customerType!=''">
+ 				and customerType = #{customerType}
+ 			</if>
+ 			<if test="state!=null and state!=''">
+ 				and state = #{state}
+ 			</if>
+ 			<if test="createTime!=null and createTime!=''">
+ 				and createTime = #{createTime}
+ 			</if>
+ 			<if test="recentlyLogin!=null and recentlyLogin!=''">
+ 				and recentlyLogin = #{recentlyLogin}
+ 			</if>
+ 		</where>
+ 	</select>
+ 	
+ 	<update id="updateUser" parameterType="po.User">
+ 		update user
+ 		<set>
+ 			<if test="passWord!=null and passWord!=''">
+ 				passWord = #{passWord},
+ 			</if>
+ 			<if test="userName!=null and userName!=''">
+ 				userName = #{userName},
+ 			</if>
+ 			<if test="sex!=null and sex!=''">
+ 				sex = #{sex},
+ 			</if>
+ 			<if test="customerType!=null and customerType!=''">
+ 				customerType = #{customerType},
+ 			</if>
+ 			<if test="storeName!=null and storeName!=''">
+ 				storeName = #{storeName},
+ 			</if>
+ 			<if test="state!=null and state!=''">
+ 				state = #{state},
+ 			</if>
+ 			<if test="createTime!=null and createTime!=''">
+ 				createTime = #{createTime},
+ 			</if>
+ 			<if test="recentlyLogin!=null and recentlyLogin!=''">
+ 				recentlyLogin = #{recentlyLogin},
+ 			</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<!-- useGeneratedKeys 是否自动生成主键，默认false -->
+ 	<!-- keyProperty 返回的主键赋值给对象的哪个属性 -->
+ 	<!-- keyColumn当主键不是第一列时，必须设置 -->
+ 	<insert id="addUser" parameterType="po.User" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+ 		insert into user(phoneNumber,passWord,userName,sex,idCard,customerType,storeName,state,
+ 		createTime,recentlyLogin)
+ 		values(#{phoneNumber},#{passWord},#{userName},#{sex},#{idCard},#{customerType},#{storeName},#{state},
+ 		#{createTime},#{createTime})
+ 	</insert>
+ 	
+ </mapper>

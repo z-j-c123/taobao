@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.shoppingcartdao.ShoppingCartDao">
+
+	<insert id="addShoppingCart" parameterType="po.ShoppingCart">
+		insert into shoppingcart(userId,commodityId,commoditydetailsId,commodityCount,joiningTime)
+		values(#{userId},#{commodityId},#{commoditydetailsId},#{commodityCount},#{joiningTime})
+	</insert>
+
+	<delete id="deleteShoppingCart">
+		delete from shoppingcart
+		where userId = #{userId} and FIND_IN_SET(id,#{condition})
+	</delete>
+	
+	<update id="updateShoppingCart" parameterType="po.ShoppingCart">
+		update shoppingcart
+		<set>
+			<if test="commodityCount!=null and commodityCount!=''">
+				commodityCount = #{commodityCount},
+			</if>
+		</set>
+		where id = #{id} and userId = #{userId}
+	</update>
+	
+	<select id="findAllShoppingCart" resultMap="scc">
+		select C.*,D.commodityName,if(commodityPicture1 is not null,commodityPicture1,
+		if(commodityPicture2 is not null,commodityPicture2,
+		if(commodityPicture3 is not null,commodityPicture3,
+		if(commodityPicture4 is not null,commodityPicture4,
+		if(commodityPicture5 is not null,commodityPicture5,
+		if(commodityPicture6 is not null,commodityPicture6,
+		if(commodityPicture7 is not null,commodityPicture7,
+		if(commodityPicture8 is not null,commodityPicture8,
+		if(commodityPicture9 is not null,commodityPicture9,
+		if(commodityPicture10 is not null,commodityPicture10,
+		if(commodityPicture11 is not null,commodityPicture11,
+		if(commodityPicture12 is not null,commodityPicture12,
+		if(commodityPicture13 is not null,commodityPicture13,
+		if(commodityPicture14 is not null,commodityPicture14,
+		if(commodityPicture15 is not null,commodityPicture15,null
+		))))))))))))))) as commodityPicture1 from
+		(select A.*,B.specifications,B.price from
+		(select id,commodityId,commoditydetailsId,commodityCount from shoppingcart where userId = #{userId}) A
+		inner join commoditydetails B on A.commoditydetailsId = B.id) C inner join commodity D
+		on C.commodityId = D.id
+	</select>
+	
+	<select id="findShoppingCart" parameterType="po.ShoppingCart" resultType="po.ShoppingCart">
+		select * from shoppingcart
+		<where>
+			<if test="id!=null">
+				and id = #{id}
+			</if>
+			<if test="userId!=null">
+				and userId = #{userId}
+			</if>
+			<if test="commodityId!=null">
+				and commodityId = #{commodityId}
+			</if>
+			<if test="commoditydetailsId!=null">
+				and commoditydetailsId = #{commoditydetailsId}
+			</if>
+			<if test="commodityCount!=null">
+				and commodityCount = #{commodityCount}
+			</if>
+			<if test="joiningTime!=null">
+				and joiningTime = #{joiningTime}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap type="po.ShoppingCartCommodity" id="scc">
+		<id property="id" column="id"/>
+		<result property="commodityId" column="commodityId"/>
+		<result property="commoditydetailsId" column="commoditydetailsId"/>
+		<result property="commodityName" column="commodityName"/>
+		<result property="specifications" column="specifications"/>
+		<result property="price" column="price"/>
+		<result property="count" column="commodityCount"/>
+		<result property="commodityPicture1" column="commodityPicture1"/>
+	</resultMap>
+	<select id="findListShoppingCartCommodity" resultMap="scc">
+		select C.*,D.commodityName,if(commodityPicture1 is not null,commodityPicture1,
+		if(commodityPicture2 is not null,commodityPicture2,
+		if(commodityPicture3 is not null,commodityPicture3,
+		if(commodityPicture4 is not null,commodityPicture4,
+		if(commodityPicture5 is not null,commodityPicture5,
+		if(commodityPicture6 is not null,commodityPicture6,
+		if(commodityPicture7 is not null,commodityPicture7,
+		if(commodityPicture8 is not null,commodityPicture8,
+		if(commodityPicture9 is not null,commodityPicture9,
+		if(commodityPicture10 is not null,commodityPicture10,
+		if(commodityPicture11 is not null,commodityPicture11,
+		if(commodityPicture12 is not null,commodityPicture12,
+		if(commodityPicture13 is not null,commodityPicture13,
+		if(commodityPicture14 is not null,commodityPicture14,
+		if(commodityPicture15 is not null,commodityPicture15,null
+		))))))))))))))) as commodityPicture1 from
+		(select A.*,B.specifications,B.price from
+		(select id,commodityId,commoditydetailsId,commodityCount from shoppingcart where userId = #{userId}
+		and FIND_IN_SET(id,#{condition})) A
+		inner join commoditydetails B on A.commoditydetailsId = B.id) C inner join commodity D
+		on C.commodityId = D.id
+	</select>
+</mapper>

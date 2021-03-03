@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.journaldao.JournalDao">
+	<insert id="addJournal" parameterType="po.Journal">
+		insert into journal(userId,journalTime,operation) values(#{userId},#{journalTime},#{operation})
+	</insert>
+	
+	<select id="collectionRecord" resultType="String">
+		select searchContent from  
+		(select max(UNIX_TIMESTAMP(journalTime)) journalTime,subString(operation,6) searchContent from journal
+		where userId = #{userId} and operation like '搜索商品%'
+		group by searchContent) A
+		order by journalTime desc
+		limit 10
+	</select>
+	
+</mapper>

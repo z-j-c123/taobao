@@ -1,0 +1,87 @@
+.bg{
+    position: relative;
+}
+.form{
+    width:400px;
+    height: 340px;
+    position: absolute;
+    padding-top: 25px;
+}
+
+
+.iconfont{
+    z-index: 2;
+    margin-top: 1px;
+    margin-left: 16px;
+    position: absolute;
+    display: inline-block;
+    color:rgb(255, 255, 255);
+    width: 36px;
+    height: 36px;
+    font-size: 25px;
+    text-align: center;
+    line-height: 36px;
+}
+.iconyonghu::before{
+	display: inline-block;
+	background-color: #EFF3F4;
+	width: 36px;
+	color: #fff;
+}
+.iconmima::before{
+	display: inline-block;
+	background-color: #EFF3F4;
+	width: 36px;
+	color: #fff;
+}
+.form-group{
+    margin-left: 20px;
+}
+.top{
+    margin-top: -10px;
+}
+.btn{
+    margin-left: 16px;
+    text-align: center;
+    text-indent: -10px;
+}
+input{
+    text-indent: 30px;
+    overflow: hidden;
+}
+.liList{
+    position: absolute;
+    left: 100px;
+    display: flex;
+}
+.liList li{
+    list-style: none;
+    margin-left: 30px;
+}
+a{
+    color: #000;
+}
+a:hover{
+    color: #586268;
+    text-decoration: none;
+}
+#password{
+    margin-bottom: 2px;
+}
+.msg{
+    color: red;
+}
+.check{
+    position: relative;
+}
+#sendCode{
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    color: #ccc;
+    border: none;
+    background-color:#fff;
+}
+#sendCode:focus{
+	outline:none;
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.commentdao.CommentDao">
+	
+	<insert id="addComment" parameterType="po.Comment">
+		insert into comment(userId, commodityId, message, commentPicture1, commentPicture2, commentPicture3, commentPicture4, commentPicture5
+			, commentGrade) values(#{userId}, #{commodityId}, #{message}, #{commentPictures[0]}, #{commentPictures[1]}, #{commentPictures[2]}
+			, #{commentPictures[3]}, #{commentPictures[4]}, #{commentGrade})
+	</insert>
+	
+	<select id="findComment" parameterType="po.Comment" resultType="po.Comment">
+		select * from comment
+		<where>
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="userId != null and userId != ''">
+				and userId = #{userId}
+			</if>
+			<if test="commodityId != null and commodityId != ''">
+				and commodityId = #{commodityId}
+			</if>
+			<if test="commentGrade != null and commentGrade != ''">
+				and commentGrade = #{commentGrade}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

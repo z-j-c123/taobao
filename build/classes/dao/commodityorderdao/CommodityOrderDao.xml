@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.commodityorderdao.CommodityOrderDao">
+
+	<update id="updateCommodityOrder">
+		update commodityorder
+		<set>
+			<if test="orderStatus != null and orderStatus != ''">
+				orderStatus = #{orderStatus},
+			</if>
+			<if test="orderPrice != null and orderPrice != ''">
+				orderPrice = #{orderPrice}
+			</if>
+			<if test="unpaidTime != null and unpaidTime != ''">
+				unpaidTime = #{unpaidTime}
+			</if>
+			<if test="paymentTime != null and paymentTime != ''">
+				paymentTime = #{paymentTime}
+			</if>
+			<if test="cancelTime != null and cancelTime != ''">
+				cancelTime = #{cancelTime}
+			</if>
+			<if test="deliverGoodsTime != null and deliverGoodsTime != ''">
+				deliverGoodsTime = #{deliverGoodsTime}
+			</if>
+			<if test="receivingGoodsTime != null and receivingGoodsTime != ''">
+				receivingGoodsTime = #{receivingGoodsTime}
+			</if>
+			<if test="applyForRefundTime != null and applyForRefundTime != ''">
+				applyForRefundTime = #{applyForRefundTime}
+			</if>
+			<if test="refundedTime != null and refundedTime != ''">
+				refundedTime = #{refundedTime}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<insert id="addCommodityOrder" parameterType="po.CommodityOrder">
+		insert into	commodityorder(buyerId, sellerId, commodityId, commodityDetailsId, orderStatus, orderNumber, togetherOrderNumber, orderCount
+		, orderPrice, address, unpaidTime) values(#{buyerId}, #{sellerId}, #{commodityId}, #{commodityDetailsId}, #{orderStatus}, #{orderNumber}
+		, #{togetherOrderNumber}, #{orderCount}, #{orderPrice}, #{address}, #{unpaidTime})
+	</insert>
+
+	<select id="findCommodityOrder" parameterType="po.CommodityOrder" resultType="po.CommodityOrder">
+		select * from commodityorder
+		<where>
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="buyerId != null and buyerId != ''">
+				and buyerId = #{buyerId}
+			</if>
+			<if test="sellerId != null and sellerId != ''">
+				and sellerId = #{sellerId}
+			</if>
+			<if test="commodityId != null and commodityId != ''">
+				and commodityId = #{commodityId}
+			</if>
+			<if test="commodityDetailsId != null and commodityDetailsId != ''">
+				and commodityDetailsId = #{commodityDetailslId}
+			</if>
+			<if test="orderStatus != null and orderStatus != ''">
+				and orderStatus = #{orderStatus}
+			</if>
+			<if test="orderNumber != null and orderNumber != ''">
+				and orderNumber = #{orderNumber}
+			</if>
+			<if test="togetherOrderNumber != null and togetherOrderNumber != ''">
+				and togetherOrderNumber = #{togetherOrderNumber}
+			</if>
+			<if test="orderCount != null and orderCount != ''">
+				and orderCount = #{orderCount}
+			</if>
+			<if test="orderPrice != null and orderPrice != ''">
+				and orderPrice = #{orderPrice}
+			</if>
+		</where>
+		for update
+	</select>
+
+	<select id="getListOrder" resultMap="order">
+		select C.*,D.specifications from
+		(select B.commodityName,if(commodityPicture1 is not null,commodityPicture1,
+		if(commodityPicture2 is not null,commodityPicture2,
+		if(commodityPicture3 is not null,commodityPicture3,
+		if(commodityPicture4 is not null,commodityPicture4,
+		if(commodityPicture5 is not null,commodityPicture5,
+		if(commodityPicture6 is not null,commodityPicture6,
+		if(commodityPicture7 is not null,commodityPicture7,
+		if(commodityPicture8 is not null,commodityPicture8,
+		if(commodityPicture9 is not null,commodityPicture9,
+		if(commodityPicture10 is not null,commodityPicture10,
+		if(commodityPicture11 is not null,commodityPicture11,
+		if(commodityPicture12 is not null,commodityPicture12,
+		if(commodityPicture13 is not null,commodityPicture13,
+		if(commodityPicture14 is not null,commodityPicture14,
+		if(commodityPicture15 is not null,commodityPicture15,null
+		))))))))))))))) as commodityPicture,A.* from
+		(select id,commodityId,commodityDetailsId,orderCount,orderPrice,orderStatus from commodityorder where buyerId = #{userId}) A inner join
+		commodity B
+		on A.commodityId = B.id) C inner join commoditydetails D on commoditydetailsId = D.id
+	</select>
+	
+	<resultMap type="po.Order" id="order">
+		<id property="id" column="id"/>
+		<result property="commodityId" column="commodityId"/>
+		<result property="commodityDetailsId" column="commodityDetailsId"/>
+		<result property="commodityName" column="commodityName"/>
+		<result property="specifications" column="specifications"/>
+		<result property="commodityPicture" column="commodityPicture"/>
+		<result property="orderCount" column="orderCount"/>
+		<result property="orderPrice" column="orderPrice"/>
+		<result property="orderStatus" column="orderStatus"/>
+	</resultMap>
+	<select id="getListSellOrder" resultMap="sellorder">
+		select C.*,D.specifications from
+		(SELECT A.*,B.commodityName,if(commodityPicture1 is not null,commodityPicture1,
+		if(commodityPicture2 is not null,commodityPicture2,
+		if(commodityPicture3 is not null,commodityPicture3,
+		if(commodityPicture4 is not null,commodityPicture4,
+		if(commodityPicture5 is not null,commodityPicture5,
+		if(commodityPicture6 is not null,commodityPicture6,
+		if(commodityPicture7 is not null,commodityPicture7,
+		if(commodityPicture8 is not null,commodityPicture8,
+		if(commodityPicture9 is not null,commodityPicture9,
+		if(commodityPicture10 is not null,commodityPicture10,
+		if(commodityPicture11 is not null,commodityPicture11,
+		if(commodityPicture12 is not null,commodityPicture12,
+		if(commodityPicture13 is not null,commodityPicture13,
+		if(commodityPicture14 is not null,commodityPicture14,
+		if(commodityPicture15 is not null,commodityPicture15,null
+		))))))))))))))) as commodityPicture from
+		(select id,orderNumber,commodityId,commodityDetailsId,orderCount,orderPrice,orderStatus,address from commodityorder where sellerId = #{userId}) A
+		inner join commodity B
+		on A.commodityId = B.id) C inner join commoditydetails D
+		on c.commoditydetailsId = D.id
+	</select>
+	
+	<resultMap type="po.SellOrder" id="sellorder">
+		<id property="id" column="id"/>
+		<result property="orderNumber" column="orderNumber"/>
+		<result property="commodityId" column="commodityId"/>
+		<result property="commodityDetailsId" column="commodityDetailsId"/>
+		<result property="commodityName" column="commodityName"/>
+		<result property="specifications" column="specifications"/>
+		<result property="orderCount" column="orderCount"/>
+		<result property="orderPrice" column="orderPrice"/>
+		<result property="orderStatus" column="orderStatus"/>
+		<result property="address" column="address"/>
+		<result property="commodityPicture" column="commodityPicture"/>
+	</resultMap>
+</mapper>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.commoditydao.CommodityDao">
+	<select id="getListDetailsJspCommodity" resultType="po.Commodity">
+		select * from commodity where sellerId = #{userId}
+		order by commodityCount
+		LIMIT #{count}
+	</select>
+	
+	<update id="updateCommodityPicture">
+		update commodity
+		<set>
+			<if test="commodityPicture1 != null and commodityPicture1 != ''">
+				commodityPicture1 = #{commodityPicture1}
+			</if>
+			<if test="commodityPicture2 != null and commodityPicture2 != ''">
+				commodityPicture2 = #{commodityPicture2}
+			</if>
+			<if test="commodityPicture3 != null and commodityPicture3 != ''">
+				commodityPicture3 = #{commodityPicture3}
+			</if>
+			<if test="commodityPicture4 != null and commodityPicture4 != ''">
+				commodityPicture4 = #{commodityPicture4}
+			</if>
+			<if test="commodityPicture5 != null and commodityPicture5 != ''">
+				commodityPicture5 = #{commodityPicture5}
+			</if>
+			<if test="commodityPicture6 != null and commodityPicture6 != ''">
+				commodityPicture6 = #{commodityPicture6}
+			</if>
+			<if test="commodityPicture7 != null and commodityPicture7 != ''">
+				commodityPicture7 = #{commodityPicture7}
+			</if>
+			<if test="commodityPicture8 != null and commodityPicture8 != ''">
+				commodityPicture8 = #{commodityPicture8}
+			</if>
+			<if test="commodityPicture9 != null and commodityPicture9 != ''">
+				commodityPicture9 = #{commodityPicture9}
+			</if>
+			<if test="commodityPicture10 != null and commodityPicture10 != ''">
+				commodityPicture10 = #{commodityPicture10}
+			</if>
+			<if test="commodityPicture11 != null and commodityPicture11 != ''">
+				commodityPicture11 = #{commodityPicture11}
+			</if>
+			<if test="commodityPicture12 != null and commodityPicture12 != ''">
+				commodityPicture12 = #{commodityPicture12}
+			</if>
+			<if test="commodityPicture13 != null and commodityPicture13 != ''">
+				commodityPicture13 = #{commodityPicture13}
+			</if>
+			<if test="commodityPicture14 != null and commodityPicture14 != ''">
+				commodityPicture14 = #{commodityPicture14}
+			</if>
+			<if test="commodityPicture15 != null and commodityPicture15 != ''">
+				commodityPicture15 = #{commodityPicture15}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="deleteCommodityPicture">
+		update commodity
+		<set>
+			<if test="commodityPicture1 == 'delete'">
+				commodityPicture1 = null
+			</if>
+			<if test="commodityPicture2 == 'delete'">
+				commodityPicture2 = null
+			</if>
+			<if test="commodityPicture3 == 'delete'">
+				commodityPicture3 = null
+			</if>
+			<if test="commodityPicture4 == 'delete'">
+				commodityPicture4 = null
+			</if>
+			<if test="commodityPicture5 == 'delete'">
+				commodityPicture5 = null
+			</if>
+			<if test="commodityPicture6 == 'delete'">
+				commodityPicture6 = null
+			</if>
+			<if test="commodityPicture7 == 'delete'">
+				commodityPicture7 = null
+			</if>
+			<if test="commodityPicture8 == 'delete'">
+				commodityPicture8 = null
+			</if>
+			<if test="commodityPicture9 == 'delete'">
+				commodityPicture9 = null
+			</if>
+			<if test="commodityPicture10 == 'delete'">
+				commodityPicture10 = null
+			</if>
+			<if test="commodityPicture11 == 'delete'">
+				commodityPicture11 = null
+			</if>
+			<if test="commodityPicture12 == 'delete'">
+				commodityPicture12 = null
+			</if>
+			<if test="commodityPicture13 == 'delete'">
+				commodityPicture13 = null
+			</if>
+			<if test="commodityPicture14 == 'delete'">
+				commodityPicture14 = null
+			</if>
+			<if test="commodityPicture15 == 'delete'">
+				commodityPicture15 = null
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteCommodity" parameterType="po.Commodity">
+		delete from commodity
+		<where>
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="sellerId != null and sellerId != ''">
+				and sellerId = #{sellerId}
+			</if>
+		</where>
+	</delete>
+	
+	<update id="updateCommodity" parameterType="po.Commodity">
+		update commodity
+		<set>
+ 			<if test="commodityType != null and commodityType != ''">
+ 				commodityType = #{commodityType},
+ 			</if>
+ 			<if test="commodityName != null and commodityName != ''">
+ 				commodityName = #{commodityName},
+ 			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<insert id="addCommodity" parameterType="po.Commodity">
+		insert into commodity(sellerId, commodityType, commodityName, commodityPicture1, commodityPicture2, commodityPicture3, commodityPicture4
+		, commodityPicture5, commodityPicture6, commodityPicture7, commodityPicture8, commodityPicture9, commodityPicture10, commodityPicture11
+		, commodityPicture12, commodityPicture13, commodityPicture14, commodityPicture15) values(#{sellerId}, #{commodityType}, #{commodityName}
+		, #{commodityPictures[0]}, #{commodityPictures[1]}, #{commodityPictures[2]}, #{commodityPictures[3]}, #{commodityPictures[4]}
+		, #{commodityPictures[5]}, #{commodityPictures[6]}, #{commodityPictures[7]}, #{commodityPictures[8]}, #{commodityPictures[9]}
+		, #{commodityPictures[10]}, #{commodityPictures[11]}, #{commodityPictures[12]}, #{commodityPictures[13]}, #{commodityPictures[14]})
+	</insert>
+	
+	<select id="findCommodity" parameterType="po.Commodity" resultType="po.Commodity">
+		select * from commodity
+ 		<where>
+ 			<if test="id != null and id != ''">
+ 				and id = #{id}
+ 			</if>
+ 			<if test="sellerId != null and sellerId != ''">
+ 				and sellerId = #{sellerId}
+ 			</if>
+ 			<if test="commodityType != null and commodity != ''">
+ 				and commodityType = #{commodityType}
+ 			</if>
+ 			<if test="commodityName != null and commodityName != ''">
+ 				and commodityName = #{commodityName}
+ 			</if>
+ 			<if test="commodityCount != null and commodityCount != ''">
+ 				and commodityCount = #{commodityCount}
+ 			</if>
+ 			<if test="commodityPicture1 != null and commodityPicture1 != ''">
+ 				and commodityPicture1 = #{commodityPicture1}
+ 			</if>
+ 		</where>
+	</select>
+	
+	<select id="findCommodityWithCommodityDetails" parameterType="po.Commodity" resultMap="CommodityWithCommodityDetails">
+		select *, commoditydetails.id as commoditydetails_id from commodity, commoditydetails,user
+ 		<where>
+ 			<if test="id != null and id != ''">
+ 				and commodity.id = #{id}
+ 			</if>
+ 			<if test="sellerId != null and sellerId != ''">
+ 				and sellerId = #{sellerId}
+ 			</if>
+ 			<if test="commodityType != null and commodity != ''">
+ 				and commodityType = #{commodityType}
+ 			</if>
+ 			<if test="commodityName != null and commodityName != ''">
+ 				and commodityName = #{commodityName}
+ 			</if>
+ 			<if test="commodityCount != null and commodityCount != ''">
+ 				and commodityCount = #{commodityCount}
+ 			</if>
+ 			<if test="commodityPicture1 != null and commodityPicture1 != ''">
+ 				and commodityPicture1 = #{commodityPicture1}
+ 			</if>
+ 		</where>
+ 		and commodityId = commodity.id and user.id = commodity.sellerId
+	</select>
+	<select id="searchCommodity" resultType="po.Commodity">
+		select * from commodity
+		where sellerId!=#{userId} and (commodityName like CONCAT('%',#{searchContent},'%') or commodityType like CONCAT('%',#{searchContent},'%'))
+		order by commodityCount desc
+	</select>
+	
+	<select id="getRotationTableCommodity" resultType="po.Commodity">
+		select * from commodity
+		where sellerId!=#{userId} and not FIND_IN_SET(id,#{condition}) and (commodityName like CONCAT('%',#{searchContent},'%') or commodityType like CONCAT('%',#{searchContent},'%'))
+		order by commodityCount desc
+		limit 1
+	</select>
+	
+	<select id="mostSales" resultType="po.Commodity">
+		select * from  commodity
+		where sellerId!=#{userId} and not FIND_IN_SET(id,#{condition})
+		order by commodityCount desc
+		limit #{count}
+	</select>
+	
+	<select id="recentlyMostSalesCommodity" resultType="po.Commodity">
+		select B.* from
+		(select commodityId,count(*) countcommodityId from commodityorder
+		where sellerId!=#{userId}
+		group by commodityId
+		order by countcommodityId desc
+		limit #{count}) A inner join commodity B
+		on  commodityId = id
+	</select>
+	
+	<select id="doesNotContainIdCommodity" resultType="po.Commodity">
+		select * from commodity
+		where sellerId!=#{userId} and not FIND_IN_SET(id,#{condition})
+		order by commodityCount desc
+	</select>
+	<resultMap type="po.Commodity" id="CommodityWithCommodityDetails">
+		<id property="id" column="commodityId" />
+		<result property="sellerId" column="sellerId" />
+		<result property="commodityType" column="commodityType" />
+		<result property="commodityName" column="commodityName" />
+		<result property="commodityCount" column="commodityCount" />
+		<result property="storeName" column="storeName"/>
+		<result property="commodityPicture1" column="commodityPicture1" />
+		<result property="commodityPicture2" column="commodityPicture2" />
+		<result property="commodityPicture3" column="commodityPicture3" />
+		<result property="commodityPicture4" column="commodityPicture4" />
+		<result property="commodityPicture5" column="commodityPicture5" />
+		<result property="commodityPicture6" column="commodityPicture6" />
+		<result property="commodityPicture7" column="commodityPicture7" />
+		<result property="commodityPicture8" column="commodityPicture8" />
+		<result property="commodityPicture9" column="commodityPicture9" />
+		<result property="commodityPicture10" column="commodityPicture10" />
+		<result property="commodityPicture11" column="commodityPicture11" />
+		<result property="commodityPicture12" column="commodityPicture12" />
+		<result property="commodityPicture13" column="commodityPicture13" />
+		<result property="commodityPicture14" column="commodityPicture14" />
+		<result property="commodityPicture15" column="commodityPicture15" />
+		<collection property="commodityDetailsList" ofType="po.CommodityDetails">
+			<!-- 这里的column的值要用别名，不能和上面的id重复，不然会导致只映射一条数据到集合 -->
+			<id property="id" column="commodityDetails_id" />
+			<result property="commodityId" column="commodityId" />
+			<result property="specifications" column="specifications" />
+			<result property="price" column="price" />
+			<result property="stock" column="stock" />
+		</collection>
+	</resultMap>
+</mapper>

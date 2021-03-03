@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.addressdao.AddressDao">
+ 
+ 	<insert  id="addAddress" parameterType="po.Address">
+ 		insert into address(userId,userName,phoneNumber,detailedAddress)
+ 		values(#{userId},#{userName},#{phoneNumber},#{detailedAddress})
+ 	</insert>
+ 	
+ 	<delete id="deleteAddress">
+ 		delete from address where id = #{id}
+ 	</delete>
+ 	
+ 	<update id="updateAddress" parameterType="po.Address">
+ 		update address
+ 		<set>
+ 			<if test="userName!=null and userName!=''">
+ 				userName = #{userName},
+ 			</if>
+ 			<if test="phoneNumber!=null and phoneNumber!=''">
+ 				phoneNumber = #{phoneNumber},
+ 			</if>
+ 			<if test="detailedAddress!=null and detailedAddress!=''">
+ 				detailedAddress = #{detailedAddress},
+ 			</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<select id="findAddress" parameterType="po.Address" resultType="po.Address">
+ 		select * from address
+ 		<where>
+ 			<if test="id!=null">
+ 				and id = #{id}
+ 			</if>
+ 			<if test="userId!=null">
+ 				and userId = #{userId}
+ 			</if>
+ 			<if test="userName!=null and userName!=''">
+ 				and userName = #{userName}
+ 			</if>
+ 			<if test="phoneNumber!=null and phoneNumber!=''">
+ 				and phoneNumber = #{phoneNumber}
+ 			</if>
+ 			<if test="detailedAddress!=null and detailedAddress!=''">
+ 				and detailedAddress = #{detailedAddress}
+ 			</if>
+ 		</where>
+ 	</select>
+ 	
+ </mapper>

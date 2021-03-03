@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.commoditydetailsdao.CommodityDetailsDao">
+	<insert id="addCommodityDetails" parameterType="po.CommodityDetails">
+		insert into commoditydetails(commodityId, specifications, price, stock) values(#{commodityId}, #{specifications}, #{price}, #{stock})
+	</insert>
+	
+	<update id="updateCommodityDetails" parameterType="po.CommodityDetails">
+		update commoditydetails
+		<set>
+			<if test="specifications != null and specifications != ''">
+				specifications = #{specifications},
+			</if>
+			<if test="price != null and price != ''">
+				price = #{price},
+			</if>
+			<if test="stock != null">
+				stock = #{stock},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteCommodityDetails" parameterType="po.CommodityDetails">
+		delete from commoditydetails
+		<where>
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="commodityId != null and commodityId != ''">
+				and commodityId = #{commodityId}
+			</if>
+		</where>
+	</delete>
+	
+	<select id="findCommodityDetails" parameterType="po.CommodityDetails" resultType="po.CommodityDetails">
+		select * from commoditydetails
+		<where>
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="commodityId != null and commodityId != ''">
+				and commodityId = #{commodityId}
+			</if>
+			<if test="specifications != null and specifications != ''">
+				and specifications = #{specifications}
+			</if>
+			<if test="price != null and price != ''">
+				and price = #{price}
+			</if>
+			<if test="stock != null and stock != ''">
+				and stock = #{stock}
+			</if>
+		</where>
+		for update
+	</select>
+	<select id="getShoppingCartCommodity" resultMap="scc">
+		select A.id,B.commodityName,A.specifications,A.price,if(commodityPicture1 is not null,commodityPicture1,
+		if(commodityPicture2 is not null,commodityPicture2,
+		if(commodityPicture3 is not null,commodityPicture3,
+		if(commodityPicture4 is not null,commodityPicture4,
+		if(commodityPicture5 is not null,commodityPicture5,
+		if(commodityPicture6 is not null,commodityPicture6,
+		if(commodityPicture7 is not null,commodityPicture7,
+		if(commodityPicture8 is not null,commodityPicture8,
+		if(commodityPicture9 is not null,commodityPicture9,
+		if(commodityPicture10 is not null,commodityPicture10,
+		if(commodityPicture11 is not null,commodityPicture11,
+		if(commodityPicture12 is not null,commodityPicture12,
+		if(commodityPicture13 is not null,commodityPicture13,
+		if(commodityPicture14 is not null,commodityPicture14,
+		if(commodityPicture15 is not null,commodityPicture15,null
+		))))))))))))))) as commodityPicture1 from
+		(select * from commoditydetails where id = #{id}) A inner join commodity B
+		on A.commodityId = B.id
+	</select>
+
+	<resultMap type="po.ShoppingCartCommodity" id="scc">
+		<id property="commoditydetailsId" column="id"/>
+		<result property="commodityName" column="commodityName"/>
+		<result property="specifications" column="specifications"/>
+		<result property="price" column="price"/>
+		<result property="commodityPicture1" column="commodityPicture1"/>
+	</resultMap>
+</mapper>
